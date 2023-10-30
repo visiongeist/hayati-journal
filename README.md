@@ -46,8 +46,8 @@ Follow these steps to get the Journal Web App up and running on your local machi
 1. Set up your environment variables:
 
     Create a environment.ts file in the root directory and configure the following variables:
-        DATABASE_URL: The connection URL for your database.
-        SECRET_KEY: A secret key for session management and security.
+        supabaseUrl: Supabase RESTful enpoint.
+        supabaseKey: Public key for your Supabase instance.
 
 ## Technologies Used
 
