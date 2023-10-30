@@ -1,0 +1,4 @@
+<div class="container" *ngIf="!initialized">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<router-outlet *ngIf="initialized"></router-outlet>

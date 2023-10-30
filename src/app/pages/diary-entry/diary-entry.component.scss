@@ -1,0 +1,75 @@
+@use "@angular/material" as mat;
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 900px;
+}
+
+.writeme {
+    margin-top: 24px;
+    width: 100%;
+}
+
+h1.currentDate {
+    font-size: 48px;
+    line-height: 56px;
+    margin-bottom: 48px;
+}
+
+.dateNavigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.betaControlsDivider {
+    margin: 28px 0;
+}
+
+.betaControls button {
+    margin-right: 12px;
+}
+
+.previousYearEntries {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 96px;
+    gap: 12px;
+}
+
+.previousYearEntry {
+    background-color: var(--mdc-filled-text-field-container-color);
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+.previousYearEntry,
+.previousYearEntriesHeader {
+    width: calc(33.33% - 8px);
+    width: calc(33.33% - 8px);
+}
+
+@media (min-width: 500px) and (max-width: 800px) {
+    .previousYearEntry,
+    .previousYearEntriesHeader {
+        width: calc(50% - 8px);
+    }
+}
+
+@media (max-width: 500px) {
+    .previousYearEntry,
+    .previousYearEntriesHeader {
+        width: 100%;
+    }
+}
+
+.previousYearEntryHeader {
+    display: flex;
+    justify-content: space-between;
+}

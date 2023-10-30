@@ -1,0 +1,25 @@
+<div class="container">
+    <div>
+        <h1 class="headline">"In life's ever-unfolding tale, we often lose sight of the precious moments that define
+            us."</h1>
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="form-widget">
+            <mat-form-field class="emailFormField" *ngIf="!codeRequested">
+                <mat-label>Email</mat-label>
+                <input type="email" formControlName="email" matInput>
+                <mat-hint align="start"><strong>We will send a code to your email address.</strong> </mat-hint>
+            </mat-form-field>
+            <div *ngIf="codeRequested" class="emailRequestedCode" (click)="codeRequested = false">
+                <h2>{{ signInForm.value.email }}</h2>
+            </div>
+            <mat-form-field class="otpFormField" *ngIf="codeRequested">
+                <mat-label>OTP</mat-label>
+                <input type="text" formControlName="otp" matInput maxlength="6" minlength="6">
+            </mat-form-field>
+            <div class="buttonBar">
+                <button type="submit" class="button block" [disabled]="loading" mat-raised-button color="primary">
+                    {{ loading ? 'Loading' : codeRequested ? 'Login' : 'Request OTP' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

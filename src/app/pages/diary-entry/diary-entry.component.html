@@ -1,0 +1,82 @@
+<div class="container">
+
+    <div class="dateNavigation">
+        <button class="dateChangeButton" type="button" (click)="currentDate = previousDate" mat-button aria-label="Go to previous day">
+            ⏴ {{ previousDate | date:'MMM d' }}
+        </button>
+        <button class="dateChangeButton" type="button" (click)="currentDate = null" mat-button aria-label="Go to previous day">
+            Today
+        </button>
+        <button class="dateChangeButton" type="button" (click)="currentDate = nextDate" mat-button aria-label="Go to next day">
+            {{ nextDate | date:'MMM d' }} ⏵
+        </button>
+    </div>
+
+    <h1 class="currentDate">{{ _currentDate | date:'fullDate' }}</h1>
+
+
+    <form [formGroup]="diaryEntryForm" (ngSubmit)="onSubmit()" class="form-widget">
+
+        <input type="hidden" formControlName="day" />
+        <input type="hidden" formControlName="month" />
+        <input type="hidden" formControlName="year" />
+        <div>
+            <span style="padding-right: 16px;">How are you feeling?</span>
+            <mat-button-toggle-group formControlName="feeling" aria-label="Feeling for the day">
+                <mat-button-toggle value="happy" aria-label="Happy">
+                    {{ feelingMap.happy }}
+                </mat-button-toggle>
+                <mat-button-toggle value="sad" aria-label="Sad">
+                    {{ feelingMap.sad }}
+                </mat-button-toggle>
+                <mat-button-toggle value="fear" aria-label="Fear">
+                    {{ feelingMap.fear }}
+                </mat-button-toggle>
+                <mat-button-toggle value="anger" aria-label="Anger">
+                    {{ feelingMap.anger }}
+                </mat-button-toggle>
+                <mat-button-toggle value="love" aria-label="Love">
+                    {{ feelingMap.love }}
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div>
+            <mat-form-field class="writeme">
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10"
+                    placeholder="Dear Diary..." formControlName="content"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="actionButtons">
+            <button type="submit" mat-flat-button color="primary" [disabled]="diaryEntryForm.pristine || loading">
+                {{ loading ? 'Loading ...' : 'Save' }}
+            </button>
+        </div>
+    </form>
+
+    <div class="previousYearEntries" *ngIf="entries.length > 0">
+        <div class="previousYearEntriesHeader">
+            <h3>Your day in the last years</h3>
+            <mat-divider></mat-divider>
+        </div>
+        
+        <ng-container *ngFor="let entry of entries">
+
+            <div class="previousYearEntry">
+                <div class="previousYearEntryHeader">
+                    <h2>{{entry.year}}</h2>
+                    <!--<span>{{ feelingMap[entry.feeling] }}</span>-->
+                </div>
+                <p>{{entry.content}}</p>
+            </div>
+
+        </ng-container>
+    </div>
+
+    <mat-divider class="betaControlsDivider"></mat-divider>
+    <div class="betaControls">
+        <h4>Beta Controls</h4>
+        <button type="button" (click)="onResetClick()">Reset Database</button>
+        <button type="button" (click)="signOut()">Sign Out</button>
+    </div>
+</div>

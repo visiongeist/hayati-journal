@@ -1,0 +1,39 @@
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.headline {
+    margin-top: 5vh;
+    font-size: 42px;
+    line-height: 48px;
+    text-align: center;
+    font-style: italic;
+}
+
+.emailFormField {
+    display: block;
+    width: 80%;
+    margin: 10vh auto 5vh auto;
+}
+
+.emailRequestedCode{
+    margin-top: 5vh;
+    text-align: center;
+    cursor: pointer;
+}
+
+.otpFormField {
+    display: block;
+    width: 40%;
+    margin: 5vh auto 5vh auto;
+}
+
+.buttonBar {
+    text-align: center;
+}
+
+.custom-otp-input {
+    background-color: red;
+}
