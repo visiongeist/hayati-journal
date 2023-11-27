@@ -1,13 +1,24 @@
 <div class="container">
+    <div class="headerBar">
+        <div>
+            <mat-icon aria-hidden="false" aria-label="Synchronization Status" color="{{ replicationInProgress ? 'primary' : 'basic' }}" [class.spin]="replicationInProgress">sync</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Connection Status" color="{{ networkStatus ? 'basic' : 'warn' }}">{{ networkStatus ? 'wifi' : 'wifi_off' }}</mat-icon>
+        </div>
+    </div>
+    
+    <mat-divider class="topbarDivider"></mat-divider>
 
     <div class="dateNavigation">
-        <button class="dateChangeButton" type="button" (click)="currentDate = previousDate" mat-button aria-label="Go to previous day">
+        <button class="dateChangeButton" type="button" (click)="currentDate = previousDate" mat-button
+            aria-label="Go to previous day">
             ⏴ {{ previousDate | date:'MMM d' }}
         </button>
-        <button class="dateChangeButton" type="button" (click)="currentDate = null" mat-button aria-label="Go to previous day">
+        <button class="dateChangeButton" type="button" (click)="currentDate = null" mat-button
+            aria-label="Go to previous day">
             Today
         </button>
-        <button class="dateChangeButton" type="button" (click)="currentDate = nextDate" mat-button aria-label="Go to next day">
+        <button class="dateChangeButton" type="button" (click)="currentDate = nextDate" mat-button
+            aria-label="Go to next day">
             {{ nextDate | date:'MMM d' }} ⏵
         </button>
     </div>
@@ -59,7 +70,7 @@
             <h3>Your day in the last years</h3>
             <mat-divider></mat-divider>
         </div>
-        
+
         <ng-container *ngFor="let entry of entries">
 
             <div class="previousYearEntry">
@@ -72,11 +83,8 @@
 
         </ng-container>
     </div>
-
     <mat-divider class="betaControlsDivider"></mat-divider>
     <div class="betaControls">
-        <h4>Beta Controls</h4>
-        <button type="button" (click)="onResetClick()">Reset Database</button>
-        <button type="button" (click)="signOut()">Sign Out</button>
+        <button mat-flat-button color="primary" type="button" (click)="signOut()">Sign Out</button>
     </div>
 </div>

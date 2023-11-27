@@ -1,5 +1,22 @@
 @use "@angular/material" as mat;
 
+.spin {
+    animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-359deg);
+    }
+}
+
+.topbarDivider {
+    margin: 14px 0;
+}
+
 .container {
     margin: 0 auto;
     padding: 20px;
@@ -28,8 +45,22 @@ h1.currentDate {
     justify-content: flex-end;
 }
 
+.headerBar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.headerBar mat-icon {
+    margin-left: 12px;
+}
+
 .betaControlsDivider {
     margin: 28px 0;
+}
+
+.betaControls {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .betaControls button {

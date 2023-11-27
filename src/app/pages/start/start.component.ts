@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { DiaryEntryService } from 'src/app/diary-entry.service';
 import { OfflineDatabaseService } from 'src/app/offline-database.service';
 
@@ -33,20 +32,8 @@ export class StartComponent implements OnInit {
       console.log('Device offline, skip initial replication.')
     }
 
-    // emits each document that was received from the remote
-    this.diaryEntryService.replication.received$.subscribe((doc: any) => console.dir(doc));
-
-    // emits each document that was send to the remote
-    this.diaryEntryService.replication.send$.subscribe((doc: any) => console.dir(doc));
-
     // emits all errors that happen when running the push- & pull-handlers.
-    this.diaryEntryService.replication.error$.subscribe((error: any) => console.dir(error));
-
-    // emits true when the replication was canceled, false when not.
-    this.diaryEntryService.replication.canceled$.subscribe((bool: boolean) => console.dir(bool));
-
-    // emits true when a replication cycle is running, false when not.
-    this.diaryEntryService.replication.active$.subscribe((bool: boolean) => console.dir(bool));
+    this.diaryEntryService.replication.error$.subscribe((error: any) => console.log('Synchronization Error', error));
 
     this.initialized = true;
   }

@@ -5,7 +5,7 @@ import { AuthSession } from '@supabase/supabase-js'
 import { SupabaseService } from '../../supabase.service'
 import * as DateFns from 'date-fns';
 import { DiaryEntryService } from '../../diary-entry.service';
-import { Subscription, take } from 'rxjs';
+import { Subscription, fromEvent, map, merge, of, take } from 'rxjs';
 import { RxDocument } from 'rxdb';
 
 @Component({
@@ -48,6 +48,12 @@ export class DiaryEntryComponent implements OnInit, OnDestroy {
   onDateChangeSubscription: Subscription;
   onCollectionChangeSubscription: Subscription;
 
+  networkStatus = false;
+  networkStatusSubscription: Subscription = null;
+
+  replicationInProgress = false;
+  replicationStatusSubscription: Subscription = null;
+
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   constructor(
@@ -69,6 +75,10 @@ export class DiaryEntryComponent implements OnInit, OnDestroy {
     // subscribe to collection changes
     const collection = await this.diaryEntryService.getCollection();
     this.onCollectionChangeSubscription = collection.$.subscribe((changeEvent: any) => this.onCollectionChange(changeEvent));
+    // subscribe to network connection status
+    this.subscribeNetworkStatus();
+    // subscribe to replication status
+    this.replicationStatusSubscription = this.diaryEntryService.replication.active$.subscribe((bool: boolean) => this.replicationInProgress = bool);
   }
 
   async ngOnDestroy(): Promise<void> {
@@ -78,8 +88,27 @@ export class DiaryEntryComponent implements OnInit, OnDestroy {
     if (this.onCollectionChangeSubscription) {
       this.onCollectionChangeSubscription.unsubscribe();
     }
+    if (this.networkStatusSubscription) {
+      this.networkStatusSubscription.unsubscribe();
+    }
+    if (this.replicationStatusSubscription) {
+      this.replicationStatusSubscription.unsubscribe();
+    }
   }
 
+  subscribeNetworkStatus() {
+    this.networkStatus = navigator.onLine;
+    this.networkStatusSubscription = merge(
+      of(null),
+      fromEvent(window, 'online'),
+      fromEvent(window, 'offline')
+    )
+      .pipe(map(() => navigator.onLine))
+      .subscribe(status => {
+        console.log('status', status);
+        this.networkStatus = status;
+      });
+  }
 
   /**
    * 
