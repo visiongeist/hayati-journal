@@ -35,7 +35,7 @@ export class AuthComponent {
         const { error } = await this.supabase.signIn(email)
         if (error) throw error
         this.codeRequested = true;
-        alert('Check your email for the login link!')
+        alert('Check your email for the login code!')
       }
     } catch (error) {
       if (error instanceof Error) {
